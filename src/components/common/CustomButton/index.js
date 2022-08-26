@@ -9,7 +9,7 @@ import {
 import colors from "../../../../assets/theme/colors";
 import styles from "./styles";
 
-const Input = ({
+const CustomButton = ({
   title,
   primary,
   secondary,
@@ -53,4 +53,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default CustomButton;

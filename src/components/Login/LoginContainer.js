@@ -5,6 +5,7 @@ import CustomButton from "../common/CustomButton/index";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { SIGNUP } from "../../constants/routeNames";
+import Message from "../common/Message";
 
 const LoginContainer = () => {
   const navigation = useNavigation();
@@ -17,6 +18,7 @@ const LoginContainer = () => {
       <View>
         <Text style={styles.title}>Welcome to EHContacts</Text>
         <Text style={styles.subTitle}>Please login here</Text>
+        <Message retry retryFn={() => console.log("Hello")} onDismiss={() => {}} primary message="invalid credentials" />
         <View style={styles.form}>
           <Input
             label="Username"
