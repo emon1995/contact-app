@@ -1,10 +1,10 @@
-import { Text, View } from "react-native";
+import { useState } from "react";
+import LoginContainer from "../../components/Login/LoginContainer";
 
 const Login = () => {
+  const [value, onChangeText] = useState("");
   return (
-    <View>
-      <Text>Login</Text>
-    </View>
+    <LoginContainer />
   );
 };
 
