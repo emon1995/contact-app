@@ -6,9 +6,16 @@ import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { SIGNUP } from "../../constants/routeNames";
 import Message from "../common/Message";
+import { useState } from "react";
 
 const LoginContainer = ({ form, onChange, onSubmit, error, loading }) => {
+  const [show, setShow] = useState(true);
   const navigation = useNavigation();
+
+  const toggleHandler = () => {
+    setShow(!show);
+  };
+
   return (
     <Container>
       <Image
@@ -35,9 +42,13 @@ const LoginContainer = ({ form, onChange, onSubmit, error, loading }) => {
           />
           <Input
             label="Password"
-            secureTextEntry={true}
+            secureTextEntry={show}
             placeholder="Enter Password"
-            icon={<Text>SHOW</Text>}
+            icon={
+              <TouchableOpacity onPress={toggleHandler}>
+                <Text>{show ? "SHOW" : "HIDE"}</Text>
+              </TouchableOpacity>
+            }
             iconPosition="right"
             onChangeText={(value) => onChange({ name: "password", value })}
           />

@@ -6,6 +6,7 @@ import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { LOGIN } from "../../constants/routeNames";
 import Message from "../common/Message";
+import { useState } from "react";
 
 const SignupContainer = ({
   form,
@@ -16,7 +17,13 @@ const SignupContainer = ({
   onSubmit,
   onChange,
 }) => {
+  const [show, setShow] = useState(true);
   const navigation = useNavigation();
+
+  const toggleHandler = () => {
+    setShow(!show);
+  };
+
   return (
     <Container>
       <Image
@@ -27,14 +34,14 @@ const SignupContainer = ({
         <Text style={styles.title}>Welcome to EHContacts</Text>
         <Text style={styles.subTitle}>Create a free account</Text>
         <View style={styles.form}>
-        {error?.error && (
-          <Message
-            retry
-            retryFn={() => console.log("Hello2")}
-            danger
-            message={error?.error}
-          />
-        )}
+          {error?.error && (
+            <Message
+              retry
+              retryFn={() => console.log("Hello2")}
+              danger
+              message={error?.error}
+            />
+          )}
           <Input
             label="Username"
             placeholder="Enter Username"
@@ -65,9 +72,13 @@ const SignupContainer = ({
           />
           <Input
             label="Password"
-            secureTextEntry={true}
+            secureTextEntry={show}
             placeholder="Enter Password"
-            icon={<Text>SHOW</Text>}
+            icon={
+              <TouchableOpacity onPress={toggleHandler}>
+                <Text>{show ? "SHOW" : "HIDE"}</Text>
+              </TouchableOpacity>
+            }
             iconPosition="right"
             onChangeText={(value) => onChange({ name: "password", value })}
             error={errors.password || error?.password?.[0]}
