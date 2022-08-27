@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { SIGNUP } from "../../constants/routeNames";
 import Message from "../common/Message";
 
-const LoginContainer = () => {
+const LoginContainer = ({ form, onChange, onSubmit, error, loading }) => {
   const navigation = useNavigation();
   return (
     <Container>
@@ -18,13 +18,20 @@ const LoginContainer = () => {
       <View>
         <Text style={styles.title}>Welcome to EHContacts</Text>
         <Text style={styles.subTitle}>Please login here</Text>
-        <Message retry retryFn={() => console.log("Hello")} onDismiss={() => {}} primary message="invalid credentials" />
         <View style={styles.form}>
+          {error && !error.error && (
+            <Message
+              onDismiss={() => {}}
+              danger
+              message="invalid credentials"
+            />
+          )}
+          {error?.error && <Message onDismiss danger message={error?.error} />}
           <Input
             label="Username"
             placeholder="Enter Username"
             iconPosition="right"
-            // error={"This is field is require"}
+            onChangeText={(value) => onChange({ name: "userName", value })}
           />
           <Input
             label="Password"
@@ -32,8 +39,15 @@ const LoginContainer = () => {
             placeholder="Enter Password"
             icon={<Text>SHOW</Text>}
             iconPosition="right"
+            onChangeText={(value) => onChange({ name: "password", value })}
           />
-          <CustomButton primary title="Submit" />
+          <CustomButton
+            loading={loading}
+            disabled={loading}
+            onPress={onSubmit}
+            primary
+            title="Submit"
+          />
           <View style={styles.createSection}>
             <Text style={styles.infoText}>Need a new account?</Text>
             <TouchableOpacity onPress={() => navigation.navigate(SIGNUP)}>

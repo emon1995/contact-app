@@ -1,6 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { useContext } from "react";
-import { Text, View } from "react-native";
 import { GlobalContext } from "../context/Provider";
 import AuthNavigator from "./AuthNavigator";
 import DrawerNavigator from "./DrawerNavigator";

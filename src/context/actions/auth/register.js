@@ -2,15 +2,15 @@ import {
   REGISTER_FAIL,
   REGISTER_LOADING,
   REGISTER_SUCCESS,
-  CLEAR_AUTH_STATE
+  CLEAR_AUTH_STATE,
 } from "../../../constants/actionTypes";
 import axiosInstance from "../../../helpers/axiosInterceptor";
 
-export const clearAuthState = () => dispatch => {
-    dispatch({
-        type: CLEAR_AUTH_STATE
-    })
-}
+export const clearAuthState = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_AUTH_STATE,
+  });
+};
 
 export default ({
     email,
@@ -42,7 +42,7 @@ export default ({
           type: REGISTER_FAIL,
           payload: err.response
             ? err.response.data
-            : { error: "Something went wrong, try again" },
+            : { error: "Something went wrong, try agin" },
         });
       });
   };
