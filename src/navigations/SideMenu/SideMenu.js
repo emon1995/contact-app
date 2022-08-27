@@ -1,6 +1,6 @@
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import {
-    Alert,
+  Alert,
   Image,
   SafeAreaView,
   Text,
@@ -9,25 +9,28 @@ import {
 } from "react-native";
 import Container from "../../components/common/Container";
 import { SETTINGS } from "../../constants/routeNames";
+import logoutUser from "../../context/actions/auth/logoutUser";
 import styles from "./styles";
 
-const SideMenu = () => {
+const SideMenu = ({ authDispatch }) => {
   const navigation = useNavigation();
 
   const handleLogout = () => {
     // () => navigation.toggleDrawer() ;
     navigation.dispatch(DrawerActions.toggleDrawer());
     Alert.alert("Logout!", "Are you sure you want to logout?", [
-        {
-            text: "Cancel",
-            onPress: () => {},
+      {
+        text: "Cancel",
+        onPress: () => {},
+      },
+      {
+        text: "OK",
+        onPress: () => {
+          logoutUser()(authDispatch);
         },
-        {
-            text: "OK",
-            onPress: () => {},
-        }
-    ])
-  }
+      },
+    ]);
+  };
 
   const menuItems = [
     {
