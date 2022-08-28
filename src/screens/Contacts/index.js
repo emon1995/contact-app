@@ -1,12 +1,12 @@
-import { Text, View } from "react-native";
-import Container from "../../components/common/Container";
+import { useState } from "react";;
+import ContactsComponent from "../../components/ContactsComponent/ContactsComponent";
 
 
 const Contacts = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <Container>
-      <Text>Contacts</Text>
-    </Container>
+    <ContactsComponent modalVisible={modalVisible} setModalVisible={setModalVisible} />
   );
 };
 
