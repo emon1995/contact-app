@@ -16,12 +16,6 @@ const Signup = () => {
 
   // console.log("authState", authState);
 
-  useEffect(() => {
-    if (data) {
-      navigation.navigate(LOGIN);
-    }
-  }, [data]);
-
   useFocusEffect(
     useCallback(() => {
       return () => {
@@ -98,7 +92,9 @@ const Signup = () => {
       Object.values(form).every((item) => item.trim().length > 0) &&
       Object.values(errors).every((item) => !item)
     ) {
-      register(form)(authDispatch);
+      register(form)(authDispatch)((response) => {
+        navigation.navigate(LOGIN, {data: response});
+      })
     }
   };
 

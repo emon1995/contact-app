@@ -8,7 +8,14 @@ import { SIGNUP } from "../../constants/routeNames";
 import Message from "../common/Message";
 import { useState } from "react";
 
-const LoginContainer = ({ form, onChange, onSubmit, error, loading }) => {
+const LoginContainer = ({
+  form,
+  justSignedUp,
+  onChange,
+  onSubmit,
+  error,
+  loading,
+}) => {
   const [show, setShow] = useState(true);
   const navigation = useNavigation();
 
@@ -26,6 +33,13 @@ const LoginContainer = ({ form, onChange, onSubmit, error, loading }) => {
         <Text style={styles.title}>Welcome to EHContacts</Text>
         <Text style={styles.subTitle}>Please login here</Text>
         <View style={styles.form}>
+          {justSignedUp && (
+            <Message
+              onDismiss={() => {}}
+              success
+              message="Account created successfully"
+            />
+          )}
           {error && !error.error && (
             <Message
               onDismiss={() => {}}
@@ -36,6 +50,7 @@ const LoginContainer = ({ form, onChange, onSubmit, error, loading }) => {
           {error?.error && <Message onDismiss danger message={error?.error} />}
           <Input
             label="Username"
+            value={form.userName || null}
             placeholder="Enter Username"
             iconPosition="right"
             onChangeText={(value) => onChange({ name: "userName", value })}
